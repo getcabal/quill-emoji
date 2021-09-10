@@ -147,6 +147,9 @@ class ShortNameEmoji extends Module {
           this.buttons[0].classList.remove('emoji-active');
           this.buttons[1].focus();
           return;
+        } else if (event.key === "Escape" || event.keyCode === 27) {
+          this.close(null)
+          return;
         }
       }
     } catch(e) { console.warn(e); }
@@ -188,6 +191,8 @@ class ShortNameEmoji extends Module {
         event.preventDefault();
         this.quill.enable();
         this.close(emoji);
+      } else if (event.key === "Escape" || event.keyCode === 27) {
+        this.close(null)
       }
     };
 
