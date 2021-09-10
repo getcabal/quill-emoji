@@ -81,7 +81,7 @@ class ShortNameEmoji extends Module {
     this.open = true;
 
     this.quill.on('text-change', this.onTextChange);
-    this.quill.once('selection-change', this.onSelectionChange);
+    this.quill.on('selection-change', this.onSelectionChange);
     this.onOpen && this.onOpen();
   }
 
@@ -126,8 +126,11 @@ class ShortNameEmoji extends Module {
     this.renderCompletions(emojis);
   }
 
-  maybeUnfocus() {
+  maybeUnfocus(range, oldRange, source) {
     if (this.container.querySelector("*:focus")) return;
+    if (Math.abs(range.index - oldRange.index) === 1) {
+      return;
+    }
     this.close(null);
   }
 
